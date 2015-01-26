@@ -8,7 +8,7 @@ use PhpGitHooks\Infraestructure\Git\HooksFileCopier;
  * Class PreCommitProcessor
  * @package PhpGitHooks\Composer
  */
-class PreCommitProcessor extends Processo
+class PreCommitProcessor extends Processor
 {
     private $preCommitData = array();
     private $preCommitTools = ['phpunit', 'phplint', 'php-cs-fixer', 'phpcs', 'phpmd'];
