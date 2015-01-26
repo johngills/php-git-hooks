@@ -13,7 +13,7 @@ class PhpUnitInitConfigFile extends Processor
 {
     /** @var  ConfigFileToolValidator */
     private $validatorFile;
-
+    /** @var array  */
     private $configFiles = ['phpunit.xml', 'phpunit.xml.dist'];
 
     /**
@@ -37,7 +37,7 @@ class PhpUnitInitConfigFile extends Processor
         $answer = $this->setQuestion('Do you want create a phpunit.xml.dist file?', 'Y/n', 'Y');
 
         if ('Y' === strtoupper($answer)) {
-            copy(__DIR__.'/../../../../phpunit.xml.dist', 'phpunit.xml.dist');
+            copy(__DIR__.'/../../../../phpunit.xml.dist', 'phpunit.xml.dist-a');
         }
     }
 }

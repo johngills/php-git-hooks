@@ -4,6 +4,7 @@ namespace PhpGitHooks\Composer;
 
 use PhpGitHooks\Infraestructure\Config\CheckConfigFile;
 use PhpGitHooks\Infraestructure\Config\ConfigFileWriter;
+use PhpGitHooks\Infraestructure\PhpMD\PhpMDInitConfigFile;
 use PhpGitHooks\Infraestructure\PhpUnit\PhpUnitInitConfigFile;
 
 /**
@@ -19,34 +20,42 @@ class ConfiguratorProcessor extends Processor
     private $preCommitProcessor;
     /** @var ConfigFileWriter */
     private $configFileWriter;
-    /** @var PhpUnitInitConfigFile  */
+    /** @var PhpUnitInitConfigFile */
     private $phpUnitInitConfigFile;
+    /** @var PhpMDInitConfigFile */
+    private $pmdInitConfigFile;
 
     /**
      * @param CheckConfigFile       $checkConfigFile
      * @param PreCommitProcessor    $preCommitProcessor
      * @param ConfigFileWriter      $configFileWriter
      * @param PhpUnitInitConfigFile $phpUnitInitConfigFile
+     * @param PhpMDInitConfigFile   $phpMDInitConfigFile
      */
     public function __construct(
         CheckConfigFile $checkConfigFile,
         PreCommitProcessor $preCommitProcessor,
         ConfigFileWriter $configFileWriter,
-        PhpUnitInitConfigFile $phpUnitInitConfigFile
+        PhpUnitInitConfigFile $phpUnitInitConfigFile,
+        PhpMDInitConfigFile $phpMDInitConfigFile
     ) {
         $this->checkConfigFile = $checkConfigFile;
         $this->preCommitProcessor = $preCommitProcessor;
         $this->configFileWriter = $configFileWriter;
         $this->phpUnitInitConfigFile = $phpUnitInitConfigFile;
+        $this->pmdInitConfigFile = $phpMDInitConfigFile;
     }
 
     public function process()
     {
         $this->initConfigFile();
-        $this->phpUnitInitConfigFile->setIO($this->io);
-        $this->phpUnitInitConfigFile->process();
+        $this->phpunitConfigFile();
+        $this->phpMDConfigFile();
     }
 
+    /**
+     * Create php-git-hooks.yml file
+     */
     private function initConfigFile()
     {
         if (false === $this->checkConfigFile->exists()) {
@@ -65,5 +74,23 @@ class ConfiguratorProcessor extends Processor
 
             $this->configFileWriter->write($this->checkConfigFile->getFile(), $this->configData);
         }
+    }
+
+    /**
+     * Create phpunit.xml file
+     */
+    private function phpunitConfigFile()
+    {
+        $this->phpUnitInitConfigFile->setIO($this->io);
+        $this->phpUnitInitConfigFile->process();
+    }
+
+    /**
+     * Create phpRules.xml file
+     */
+    private function phpMDConfigFile()
+    {
+        $this->pmdInitConfigFile->setIO($this->io);
+        $this->pmdInitConfigFile->process();
     }
 }
