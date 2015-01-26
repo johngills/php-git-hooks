@@ -83,7 +83,7 @@
         <service id="phpunit.init.config.file" class="PhpGitHooks\Infrastructure\PhpUnit\PhpUnitInitConfigFile">
             <argument type="service" id="config.file.tool.validator"/>
         </service>
-        <service id="phpmd.init.config.file" class="PhpGitHooks\Infraestructure\PhpMD\PhpMDInitConfigFile">
+        <service id="phpmd.init.config.file" class="PhpGitHooks\Infrastructure\PhpMD\PhpMDInitConfigFile">
             <argument type="service" id="config.file.tool.validator" />
         </service>
         <service id="configurator.processor" class="PhpGitHooks\Composer\ConfiguratorProcessor">

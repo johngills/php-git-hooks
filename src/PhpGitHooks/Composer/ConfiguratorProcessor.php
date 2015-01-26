@@ -2,6 +2,7 @@
 
 namespace PhpGitHooks\Composer;
 
+use PhpGitHooks\Infrastructure\PhpMD\PhpMDInitConfigFile;
 use PhpGitHooks\Infrastructure\Config\CheckConfigFile;
 use PhpGitHooks\Infrastructure\Config\ConfigFileWriter;
 use PhpGitHooks\Infrastructure\PhpUnit\PhpUnitInitConfigFile;

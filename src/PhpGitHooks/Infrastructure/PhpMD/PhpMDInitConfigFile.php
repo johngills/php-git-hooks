@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpGitHooks\Infraestructure\PhpMD;
+namespace PhpGitHooks\Infrastructure\PhpMD;
 
 use PhpGitHooks\Composer\Processor;
-use PhpGitHooks\Infraestructure\Common\ConfigFileToolValidator;
+use PhpGitHooks\Infrastructure\Common\ConfigFileToolValidator;
 
 /**
  * Class PhpMDInitConfigFile
